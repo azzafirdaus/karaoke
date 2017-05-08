@@ -56,14 +56,32 @@
                 <?='<span style="font-size: 16px; color: red">'.Session::get('loginError').'</span>'?>
 
                 <div class="form-group hidden-print">
+<!--
+                        <label style='font-size: 24px'>Jumlah Top Up</label>
+                        <select style='font-size: 24px' name="jmlTopUp" class="form-control">
+                        
+                            <option>50000</option>
+                            <option>100000</option>
+                            <option>150000</option>
+                            <option>200000</option>
+                            <option>250000</option>
+                            <option>300000</option>
+                            <option>350000</option>
+                            <option>400000</option>
+                            <option>450000</option>
+                            <option>500000</option>
+                        
+                    </select>
+-->
+
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-money fa-fw" style="font-size: 2em"></i>
                         </span>
-                        <input class="form-control placeholder-no-fix" type="text" style='font-size: 24px;' autocomplete="off" placeholder="Jumlah Top Up" name="jmlTopUp" id="topup" />
+                        <input class="form-control placeholder-no-fix" type="text" style='font-size: 24px;' autocomplete="off" placeholder="Jumlah Top Up" name="jmlTopUp" id="topup"/>
                     </div>
                 </div>
-
+            
                 <div class="form-group hidden-print">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -96,6 +114,10 @@
     var input = document.getElementById("topup");
     input.addEventListener('keyup', function(evt){
         var n = parseInt(this.value.replace(/\D/g,''),10);
-        input.value = n.toLocaleString();    
+        if (isNaN(n) == false){
+            input.value = n.toLocaleString();
+        } else {
+            input.value = '';
+        }
     }, false);
 </script>

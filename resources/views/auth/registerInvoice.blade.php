@@ -42,7 +42,7 @@
     <body class="terapis">
 
         <div class="home-button">
-            <form class="terapis-form" method="post" action="{{ url('backToBar') }}" > 
+            <form class="terapis-form" method="post" action="{{ url('cashierMenu') }}" > 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <br>    
@@ -80,7 +80,7 @@
                     <button type="button" class="btn btn-primary" onclick="location.href = '{{ url('auth/register') }}';">
                         <i class="glyphicon glyphicon-chevron-left"></i> Back
                     </button>
-                    <button style="padding: 5px;" type="submit" class="btn btn-success pull-right" onclick="window.print();">Print</button>
+                    <button style="padding: 5px;" type="submit" formaction="{{ url('registerPrint') }}" class="btn btn-success pull-right" onclick="window.print();">Print</button>
                 </div>
             </form>
         </div>

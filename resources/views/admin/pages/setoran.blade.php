@@ -58,16 +58,32 @@
                         </tr>
                         <tr>
                             <td>
-                                 Pendapatan Terapis
+                                 Penjualan Kartu
+                            </td>
+                            <td>
+                                 Rp. {{ number_format($totalRegistrasi) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                 Refund 1
                             </td>
                             <td>
                                  Rp. {{ number_format($totalTerapis) }}
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                 Refund 2
+                            </td>
+                            <td>
+                                 Rp. {{ number_format($totalKosong) }}
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="2">
                                 Tanggal Transaksi : {{ $lastDate }}<br>
-                                Total Setoran : Rp. {{ number_format($totalKartu - $totalTerapis) }}
+                                Total Setoran : Rp. {{ number_format($totalKartu + $totalRegistrasi - $totalTerapis - $totalKosong) }}
                             </td>
                         </tr>
                         </tbody>

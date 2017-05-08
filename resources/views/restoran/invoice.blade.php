@@ -70,7 +70,7 @@
                                     Nama
                                 </td>
                                 <td>
-                                    : {{ $datanya['nama'] }} @ <b style="font-size: 20px;">{{ $datanya['qty'] }}</b>
+                                    : {{ $datanya['nama'] }} @ <b style="font-size: 40px;">{{ $datanya['qty'] }}</b>
                                 </td>
                             </tr>   
                             @endforeach     

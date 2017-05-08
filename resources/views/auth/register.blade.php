@@ -72,7 +72,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-money fa-fw" style="font-size: 2em"></i>
                         </span>
-                        <input class="form-control placeholder-no-fix" type="text" style='font-size: 24px;' autocomplete="off" placeholder="Saldo Kartu" name="saldoKartu"/>
+                        <input class="form-control placeholder-no-fix" type="text" style='font-size: 24px;' autocomplete="off" id="register" placeholder="Saldo Kartu" name="saldoKartu"/>
                     </div>
                 </div>
 
@@ -106,3 +106,14 @@
     </body>
 <!-- END BODY -->
 </html>
+<script type="text/javascript">
+    var input = document.getElementById("register");
+    input.addEventListener('keyup', function(evt){
+        var n = parseInt(this.value.replace(/\D/g,''),10);
+        if (isNaN(n) == false){
+            input.value = n.toLocaleString();
+        } else {
+            input.value = '';
+        }
+    }, false);
+</script>

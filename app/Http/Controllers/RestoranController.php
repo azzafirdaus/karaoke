@@ -132,6 +132,9 @@ class RestoranController extends Controller{
 
             foreach($iditem as $index => $id) {
                 if($jumlahbeli[$index] > 0){
+                    if(Item::getStockById($id) < $jumlahbeli[$index]){
+                        return redirect('restoran')->withErrors('Stok '.Item::getNama($id).' tidak tersedia');
+                    }
                     array_push($pesanan, 
                         [
                             'qty' => $jumlahbeli[$index],
@@ -142,28 +145,32 @@ class RestoranController extends Controller{
                     $total += Item::getPrice($id) * $jumlahbeli[$index];
                 }
             }
-        
+            
             $saldo = Gelang::getSaldo($noGelang);
             
-            foreach($iditem as $index => $id) {
-                if($jumlahbeli[$index] > 0){
-                    Item::kurangStock($id, $jumlahbeli[$index]);
-                    TransaksiBar::add($id, $jumlahbeli[$index], $noGelang);
+            if($total <= $saldo){
+                foreach($iditem as $index => $id) {
+                    if($jumlahbeli[$index] > 0){
+                        Item::kurangStock($id, $jumlahbeli[$index]);
+                        TransaksiBar::add($id, $jumlahbeli[$index], $noGelang);
+                    }
                 }
+
+                Gelang::minSaldo(Input::get('noGelang'), $total);    
+
+                return view('restoran.invoice')
+                    ->with('noGelang', Input::get('noGelang'))
+                    ->with('transaksiBar', $pesanan)
+                    ->with('totalTransaksiBar', $total)
+                    ->with('transaksiBar1', $iditem)
+                    ->with('transaksiBar2', $jumlahbeli)
+                    ->with('sisa' , Gelang::getSaldo($noGelang))
+                    ->with('saldo', $saldo)
+                    ->with('date', date('Y-m-d H:i:s'));
             }
-
-            Gelang::minSaldo(Input::get('noGelang'), $total);    
-
-            return view('restoran.invoice')
-                ->with('noGelang', Input::get('noGelang'))
-                ->with('transaksiBar', $pesanan)
-                ->with('totalTransaksiBar', $total)
-                ->with('transaksiBar1', $iditem)
-                ->with('transaksiBar2', $jumlahbeli)
-                ->with('sisa' , Gelang::getSaldo($noGelang))
-                ->with('saldo', $saldo)
-                ->with('date', date('Y-m-d H:i:s'));
-
+            else{
+                return redirect('restoran')->withErrors('Saldo anda tidak mencukupi');
+            }
         }
         return redirect('restoran')->withErrors('Transaksi belum dibuka');
     }

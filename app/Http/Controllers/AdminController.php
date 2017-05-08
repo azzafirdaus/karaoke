@@ -21,6 +21,7 @@ use App\Terapis;
 use App\TransaksiMassage;
 use App\Absen;
 use App\GelangCustomer;
+use App\ResetKartu;
 use DB;
 
 class AdminController extends Controller{
@@ -83,16 +84,21 @@ class AdminController extends Controller{
         
         $totalKartu = GelangCustomer::getTotalOn(Periode::getLastId());
         $transaksi = TransaksiMassage::all()->where('id_periode', Periode::getLastId());
+        $totalKosong = ResetKartu::getTotal(Periode::getLastId());
+        $totalRegistrasi = GelangCustomer::getTotalKartu(Periode::getLastId());
+        
         $totalTerapis = 0;
         
         foreach($transaksi as $ehem) {
-            $totalTerapis += $ehem->refund*0.1;
+            $totalTerapis += $ehem->refund;
         }
         
         return view('admin/pages/setoran')
             ->with('lastDate', $date)
             ->with('totalKartu', $totalKartu)
             ->with('totalTerapis', $totalTerapis)
+            ->with('totalKosong', $totalKosong)
+            ->with('totalRegistrasi', $totalRegistrasi*20000)
             ->with('activePage', 'setoran')
             ->with('peran', 0);
     }

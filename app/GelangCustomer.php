@@ -27,11 +27,18 @@ class GelangCustomer extends Model
         return DB::table('gelang_customer')->where('id_periode', $id)->sum('total');
     }
 
-    public static function getLaporanKasir() {
+     public static function getLaporanKasir() {
         return DB::table('gelang_customer')
         ->select('nama_kasir', DB::raw('count(case jenis when "Registrasi" then 1 else null end) as total_berapa, sum(total) as total_kasir'))
         ->groupBy('nama_kasir')
         ->where('id_periode', Periode::getActive())
         ->get();
+    }
+
+    public static function getTotalKartu($id) {
+        return DB::table('gelang_customer')
+        ->where('id_periode', $id)
+        ->where('jenis', 'Registrasi')
+        ->count();
     }
 }

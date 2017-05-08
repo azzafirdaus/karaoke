@@ -38,11 +38,12 @@
                         <th style="font-size:16px;">
                              Nama Kasir
                         </th>
-                        <th style="font-size:16px;">
+			 <th style="font-size:16px;">
                              Jumlah Registrasi
                         </th>
+
                         <th style="font-size:16px;">
-                             Total Transaksi
+                             Jumlah
                         </th>
                     </tr>
                     </thead>
@@ -57,7 +58,7 @@
                         <td>
                             {{ $datanya->nama_kasir }}
                         </td>
-                        <td>
+			<td>
                             {{ $datanya->total_berapa }}
                         </td>
                         <td>

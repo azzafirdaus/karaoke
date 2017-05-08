@@ -81,7 +81,7 @@
                             </tr>   
                             <tr>    
                                 <td>
-                                    Massage
+                                    Massage +PPN 35%
                                 </td>
                                 <td>
                                     : Rp. {{ number_format($harga) }}

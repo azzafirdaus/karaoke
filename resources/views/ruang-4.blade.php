@@ -26,7 +26,7 @@
 		<div class="container">
 			<br>
 			<p style='font-size: 60px; color: black; text-align: center;'>Status Ruangan Lantai 4</p>
-			<div class="row col-xs-9" style="margin:40px 10px;">
+			<div class="row col-xs-9" style="margin:40px 220px;">
 			  @foreach($data as $ruang)
 			  <button class="col-xs-1 ruang" onclick=" <?php if($ruang->available == 0){ ?> location.href = '{{ route('set.active2', ['id' => $ruang->id]) }}'<?php }else{ ?>location.href = '{{ route('set.inactive2', ['id' => $ruang->id]) }}'<?php } ?>" style="<?php if($ruang->available == 0): ?>background-color: red <?php endif; ?>">Ruang {{ $ruang->id }}</button>
 			  @endforeach

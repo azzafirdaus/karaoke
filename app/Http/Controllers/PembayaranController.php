@@ -18,7 +18,6 @@ use App\User;
 use App\Terapis;
 use App\GelangCustomer;
 use App\ResetKartu;
-use Form;
 
 class PembayaranController extends Controller{
     //
@@ -28,7 +27,7 @@ class PembayaranController extends Controller{
     	if(Auth::check()){
 
         if(Periode::activeExist() == 1) {
-		  	return view('pembayaran')->with('Form', new Form);     
+		  	return view('pembayaran');     
         } else {
             return redirect('cashierMenu')->withErrors('Transaksi belum dibuka');
         }
@@ -69,7 +68,7 @@ class PembayaranController extends Controller{
             
             foreach($transaksi as $terapi) {
                 $count++;
-                $total += $terapi->refund * 0.1 ;
+                $total += $terapi->refund ;
             }
         
             
@@ -105,7 +104,7 @@ class PembayaranController extends Controller{
 		}
         
         $noGelang = Input::get('noGelang');
-        $jumlah = Input::get('jmlTopUp');
+        $jumlah = str_replace(',', '', Input::get('jmlTopUp'));
         
         if(Gelang::checkAvailable($noGelang) == 0) {
             
@@ -125,7 +124,48 @@ class PembayaranController extends Controller{
         $transaksi->nama_kasir = User::getName(Auth::user()->username);
         $transaksi->id_periode = Periode::getActive();
         $transaksi->save();
-
+//        $transaksiBar = TransaksiBar::getTransaksi($noGelang);
+//        $total = 0;
+//        $data = array();
+//        foreach($transaksiBar as $transaksi) {
+//            array_push($data, 
+//                      [
+//                        'qty' => $transaksi->jumlah,
+//                        'isi' => Item::getNama($transaksi->id_item) . ' @ ' . Item::getPrice($transaksi->id_item),                      
+//                        'jumlah' => $transaksi->harga_total
+//                      ]
+//                      );
+//            $total += $transaksi->harga_total;
+//        }
+//        
+//        $transaksiKaraoke = TransaksiKaraoke::getTransaksi($noGelang);
+//        foreach($transaksiKaraoke as $transaksi) {
+//            array_push($data, 
+//                      [
+//                        'qty' => $transaksi->durasi,
+//                        'isi' => 'Karaoke @ ' . Fasilitas::getHarga('Karaoke', 60) . '/60 menit',                      
+//                        'jumlah' => $transaksi->harga
+//                      ]
+//                      );
+//            $total += $transaksi->harga;
+//        }
+//        
+//        $transaksiMassage = TransaksiMassage::getTransaksi($noGelang);
+//        foreach($transaksiMassage as $transaksi) {
+//            array_push($data, 
+//                      [
+//                        'qty' => $transaksi->durasi,
+//                        'isi' => 'Massage @ ' . Fasilitas::getHarga('Massage', 60) . '/60 menit',                      
+//                        'jumlah' => $transaksi->harga
+//                      ]
+//                      );
+//            $total += $transaksi->harga;
+//        }
+//        print_r($data);
+        
+//        foreach($data as $datanya) {
+//            echo $datanya['qty'];
+//        }
         return view('pembayaran-show')
             ->with('noKartu', $noGelang)
             ->with('sebelum', $saldo)
@@ -167,11 +207,8 @@ class PembayaranController extends Controller{
         
         if(Gelang::checkAvailable($noGelang) == 0) {
             return view('cashier.kosongkan-kartu')->withErrors("No kartu belum dipakai")->with('jumlah', ResetKartu::getTotal(Periode::getActive()))->with('saldo', 0);
-        } 
-        elseif($noGelang >= 1000001 && $noGelang <= 9999999){
-            return view('cashier.kosongkan-kartu')->withErrors("No kartu tidak dapat dikosongkan")->with('jumlah', ResetKartu::getTotal(Periode::getActive()))->with('saldo', 0);
-        }
-        else{    
+        }else{
+		    
             $sisaSaldo = Gelang::resetSaldo($noGelang);
 
             $transaksi = new ResetKartu;
@@ -219,7 +256,7 @@ class PembayaranController extends Controller{
             
             foreach($transaksi as $terapi) {
                 $count++;
-                $total += $terapi->refund * 0.1 ;
+                $total += $terapi->refund;
             }
         
             

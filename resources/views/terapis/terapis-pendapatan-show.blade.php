@@ -48,7 +48,7 @@
                 <br>
                 <div class="col-md-6 col-md-offset-3" id="tagihan">
                     <div>
-                        <span>No. Terapis : {{ $noTerapis }}</span>
+                        <span>No. Terapis : </span> <span style="font-size:30px"> {{ $noTerapis }}</span>
                     </div>
                     <br>
                     <div>
@@ -113,8 +113,8 @@
 
     <script>
         window.onload = function() {
-            setTimeout(function(){ window.print(); }, 3000);
-            setTimeout(function(){ location.href = "{{ url('printPendapatan') }} "; }, 5000);
+            setTimeout(function(){ window.print(); }, 1000);
+            setTimeout(function(){ location.href = "{{ url('printPendapatan') }} "; }, 3000);
         };
     </script>
 <!-- END BODY -->

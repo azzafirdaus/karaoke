@@ -94,52 +94,55 @@
             <div class="well" style="font-size:24px">
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                     #
-                                </th>
-                                <th>
-                                     Makanan/Minuman
-                                </th>
-                                <th>
-                                     Jumlah
-                                </th>
-                                <th>
-                                     &nbsp;
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <p class="hidden">{{ $count = 1 }}</p>
-                            @foreach($transaksiBar1 as $index => $isi)
-                            <tr>
-                                <td>
-                                     {{ $count++ }}
-                                </td>
-                                <td>
-                                     {{ $isi }}
-                                </td>
-                                <td>
-                                     {{ $transaksiBar2[$index] }}
-                                </td>
-                                <td>
-                                    <form method="post">
+                    <thead>
+                    <tr>
+                        <th>
+                             #
+                        </th>
+                        <th>
+                             Makanan/Minuman
+                        </th>
+                        <th>
+                             Jumlah
+                        </th>
+                        <th>
+                             &nbsp;
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        
+                                <p class="hidden">{{ $count = 1 }}</p>
+                                @foreach($transaksiBar1 as $index => $isi)
+                                <tr>
+                                    <td>
+                                         {{ $count++ }}
+                                    </td>
+                                    <td>
+                                         {{ $isi }}
+                                    </td>
+                                    <td>
+                                         {{ $transaksiBar2[$index] }}
+                                    </td>
+                                    <td>
+                                        
+                                        <form method="post">
+                                            
                                         @foreach($transaksiBar1 as $value1)
-                                        <input type="hidden" name="result1[]" value="{{ $value1 }}">
+                                            <input type="hidden" name="result1[]" value="{{ $value1 }}">
                                         @endforeach
                                         @foreach($transaksiBar2 as $value2)
-                                        <input type="hidden" name="result2[]" value="{{ $value2 }}">
+                                            <input type="hidden" name="result2[]" value="{{ $value2 }}">
                                         @endforeach
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input class="hidden" name="noKartu" value="{{ $noKartu }}">
-                                        <input class="hidden" type="" autocomplete="off" placeholder="" name="idArray" value="{{ $count }}"/>
-                                        <button type="submit" formaction="{{ url('barItemDelete') }}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
-                                    </form>
-                                </td>
-                            </tr>    
-                            @endforeach     
-                        </tbody>
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input class="hidden" name="noKartu" value="{{ $noKartu }}">
+                                            <input class="hidden" type="" autocomplete="off" placeholder="" name="idArray" value="{{ $count }}"/>
+                                            <button type="submit" formaction="{{ url('barItemDelete') }}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>    
+                                @endforeach     
+                    </tbody>
                     </table>
                 </div>
             </div>

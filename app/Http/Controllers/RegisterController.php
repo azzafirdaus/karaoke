@@ -36,9 +36,10 @@ class RegisterController extends Controller {
 			return redirect('auth/register')->withErrors($validator);
 		}
 
-		$saldo = Input::get('saldoKartu');
 		$no_gelang = Input::get('noGelang'); 
+		$saldo = str_replace(',', '', Input::get('saldoKartu'));
 		
+
         if(Gelang::checkAvailable($no_gelang) != 0) {
             return redirect('auth/register')->withErrors('Nomer kartu telah digunakan');
         }

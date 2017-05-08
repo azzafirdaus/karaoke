@@ -45,7 +45,7 @@
                 <div class="col-md-6 col-md-offset-4" id="tagihan">
                     <br>
                     <div>
-                        <table class="table" style="width:250px; color: black; text-align: left">
+                        <table class="table" style="width:400px; color: black; text-align: left; font-size: 25px;">
                             <tbody>
                                 <tr>
                                     <td>

@@ -26,7 +26,6 @@
         <link href="{{ asset('assets/css/themes/default.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/pages/loginWide.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/css/pages/terapis.css') }}" rel="stylesheet">
         <!-- END THEME STYLES -->
         <link rel="shortcut icon" href="favicon.ico"/>
         <!-- BEGIN EXTERNAL SCRIPTS -->
@@ -35,50 +34,13 @@
     
     <!-- BEGIN BODY -->
     <body class="login">
-        <div class="terapis visible-print">
-            <div class="home-button">
-                <div class="col-md-6 col-md-offset-4" id="tagihan">
-                    <div>
-                        <span>No. Kartu : {{ $noKartu }}</span>
-                    </div>
-                    <br>
-                    <div>
-                        <table class="table" style="width:250px; color: black; text-align: left">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Saldo Sebelum
-                                    </td>
-                                    <td>
-                                        : Rp. {{ number_format($sebelum) }}
-                                    </td>
-                                </tr>
-                                <tr>    
-                                    <td>
-                                        Jumlah Top Up
-                                    </td>
-                                    <td>
-                                        : Rp. {{ number_format($jumlah) }}
-                                    </td>
-                                </tr>
-                                <tr>    
-                                    <td>
-                                        Saldo Sekarang
-                                    </td>
-                                    <td>
-                                        : Rp. {{ number_format($sebelum + $jumlah) }}
-                                    </td>
-                                </tr>  
-                            </tbody>
-                        </table>
-                        <br>
-                    </div>
-                </div>
-            </div>
+        <!-- BEGIN LOGO -->
+        <div class="logo">
+<!--            <img src="assets/img/logo.png" alt=""/>-->
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
-        <div class="content hidden-print" style="margin-top: 50px;">
+        <div class="content">
             <!-- BEGIN LOGIN FORM -->
             <form class="login-form" action="{{ url('pembayaran') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -91,6 +53,25 @@
                 <?='<span style="font-size: 16px; color: red">'.Session::get('loginError').'</span>'?>
 
                 <div class="form-group hidden-print">
+<!--
+                        <label style='font-size: 24px'>Jumlah Top Up</label>
+                        <select style='font-size: 24px' name="jmlTopUp" class="form-control">
+                        
+                            <option>50000</option>
+                            <option>100000</option>
+                            <option>150000</option>
+                            <option>200000</option>
+                            <option>250000</option>
+                            <option>300000</option>
+                            <option>350000</option>
+                            <option>400000</option>
+                            <option>450000</option>
+                            <option>500000</option>
+                        
+                    </select
+-->
+                    
+
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-money fa-fw" style="font-size: 2em"></i>
@@ -173,8 +154,6 @@
             <!-- END LOGIN FORM -->
         </div>
         <!-- END LOGIN -->
-
     </body>
-    
 <!-- END BODY -->
 </html>

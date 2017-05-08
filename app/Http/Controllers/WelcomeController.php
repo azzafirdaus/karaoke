@@ -30,30 +30,30 @@ class WelcomeController extends Controller {
 	}
 
 	public function statusRuang(){
-		$data = Ruang::all()->where('lantai', 3);
+		$data = Ruang::all()->where('lantai', '3');
 		return view('ruang-3')->with('data', $data);
 	}
 
 	public function setActive($id){
 		Ruang::setAvailable($id);
-		$data = Ruang::all()->where('lantai', 3);
+		$data = Ruang::all()->where('lantai', '3');
 		return view('ruang-3')->with('data', $data);
 	}	
 
 	public function setInactive($id){
 		Ruang::setRoomUnavailable($id);
-		$data = Ruang::all()->where('lantai', 3);
+		$data = Ruang::all()->where('lantai', '3');
 		return view('ruang-3')->with('data', $data);
 	}
 
 	public function statusRuang2(){
-		$data = Ruang::all()->where('lantai', 4);
+		$data = Ruang::all()->where('lantai', '4');
 		return view('ruang-4')->with('data', $data);
 	}
 
 	public function setActive2($id){
 		Ruang::setAvailable($id);
-		$data = Ruang::all()->where('lantai', 4);
+		$data = Ruang::all()->where('lantai', '4');
 		return view('ruang-4')->with('data', $data);
 	}	
 
@@ -62,22 +62,4 @@ class WelcomeController extends Controller {
 		$data = Ruang::all()->where('lantai', 4);
 		return view('ruang-4')->with('data', $data);
 	}
-
-	public function statusRuangGabung(){
-		$data = Ruang::all();
-		return view('ruang-gabung')->with('data', $data);
-	}
-
-	public function setActiveGabung($id){
-		Ruang::setAvailable($id);
-		$data = Ruang::all();
-		return view('ruang-gabung')->with('data', $data);
-	}	
-
-	public function setInactiveGabung($id){
-		Ruang::setRoomUnavailable($id);
-		$data = Ruang::all();
-		return view('ruang-gabung')->with('data', $data);
-	}
-
 }

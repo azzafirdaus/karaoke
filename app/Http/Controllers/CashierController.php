@@ -21,7 +21,6 @@ use App\TransaksiBar3;
 use App\TransaksiKaraoke;
 use App\TransaksiMassage;
 use App\ResetKartu;
-use Illuminate\Support\Facades\Hash;
 
 class CashierController extends Controller{
     //
@@ -138,7 +137,7 @@ class CashierController extends Controller{
 		return redirect('auth/cashierLogin')->with('loginError', 'Wrong username or password');
 	}
     
-    public function openTransaction() {
+   public function openTransaction() {
         
         // $id = Auth::user()->id;
         
@@ -184,7 +183,6 @@ class CashierController extends Controller{
         
          return view('cashierMenuClose')->withErrors('Wrong password')->with('success', '');
     }
-
     public function stock(){
         return view('stock')->with('itemList', Item::all());
     }
@@ -208,7 +206,7 @@ class CashierController extends Controller{
             return view('stock_update')->withErrors($validator)->with('nama', $nama);
         }
         
-        if (Item::exist($nama) == 0) {
+        if (Item2::exist($nama) == 0) {
             
             return view('stock_update')->withErrors('Nama item tidak terdaftar')->with('nama', $nama)->with('jumlah', $jumlah);
         }
@@ -265,7 +263,7 @@ class CashierController extends Controller{
             return view('cashier.stock2_update')->withErrors('Nama item tidak terdaftar')->with('nama', $nama)->with('jumlah', $jumlah);
         }
 
-        if (Item::exist($nama) != 0){
+	if (Item::exist($nama) != 0){
             $stok_utama = Item::getStock($nama);
             if ($jumlah > $stok_utama){
                 return view('cashier.stock2_update')->withErrors('Jumlah penambahan melebihi jumlah di gudang utama')->with('nama', $nama)->with('jumlah', $jumlah);
@@ -274,6 +272,7 @@ class CashierController extends Controller{
                 Item::minStock($nama, $jumlah);
             }
         }
+        
         
         Item2::addStock($nama, $jumlah);
 
@@ -324,8 +323,8 @@ class CashierController extends Controller{
             
             return view('cashier.stock3_update')->withErrors('Nama item tidak terdaftar')->with('nama', $nama)->with('jumlah', $jumlah);
         }
-        
-        if (Item::exist($nama) != 0){
+	
+	if (Item::exist($nama) != 0){
             $stok_utama = Item::getStock($nama);
             if ($jumlah > $stok_utama){
                 return view('cashier.stock3_update')->withErrors('Jumlah penambahan melebihi jumlah di gudang utama')->with('nama', $nama)->with('jumlah', $jumlah);
@@ -334,9 +333,9 @@ class CashierController extends Controller{
                 Item::minStock($nama, $jumlah);
             }
         }
-
+        
         Item3::addStock($nama, $jumlah);
-
+        
         return view('cashier.stock3_update_proof')
             ->with('jumlah', $jumlah)
             ->with('nama', $nama)

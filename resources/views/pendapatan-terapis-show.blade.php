@@ -48,7 +48,7 @@
                 <br>
                 <div class="col-md-6 col-md-offset-3" id="tagihan">
                     <div>
-                        <span>No. Terapis : {{ $noTerapis }}</span>
+                        <span>No. Terapis : </span> <span style="font-size:30px"> {{ $noTerapis }}</span>
                     </div>
                     <br>
                     <div>
